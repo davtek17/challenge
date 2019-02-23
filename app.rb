@@ -17,7 +17,7 @@ class App < Base
 #
  get "/random_breed" do
   if params.has_key?('breed')
-	  json :message => HTTParty.get('https://dog.ceo/api/breed/hound/images/random')
+	  json :message => HTTParty.get('https://dog.ceo/api/breed/' + params["breed"] + '/images/random')
   end
  end
 end
