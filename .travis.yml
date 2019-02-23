@@ -1,4 +1,4 @@
-#language: ruby
+language: ruby
 services:
     - docker
 
@@ -13,6 +13,8 @@ before_install:
 jobs:
  include:
   - stage: test
+    install: true
     script: docker run --rm -it srlobo/challenge:$VERSION rspec specs/
   - stage: upload
+    install: true
     script: docker push srlobo/challenge:$VERSION
