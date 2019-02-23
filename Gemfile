@@ -5,6 +5,7 @@ gem "sinatra"
 gem "sinatra-contrib"
 gem "httparty"
 gem "json_spec"
+gem "rake"
 
 group :development do
   gem "pry"
