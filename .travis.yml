@@ -1,5 +1,9 @@
 language: ruby
 rvm:
  - 2.5
-script:
- - rspec specs/
+jobs:
+ include:
+  - stage: test
+    script: rspec specs/
+  - stage: build
+    script: docker build .
