@@ -6,7 +6,8 @@ env:
     - VERSION=$(git describe --tags)
 
 before_install:
-    - docker build -t srlobo/challenge:$VERSION
+    - echo "Construyendo version $VERSION"
+    - docker build -t srlobo/challenge:$VERSION .
     - docker run -d "bundle exec rspec specs/"
     - docker image ls
 
