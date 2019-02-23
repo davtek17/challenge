@@ -1,9 +1,18 @@
 language: ruby
-rvm:
- - 2.5.3
+services:
+    - docker
+
+env:
+    - VERSION=$(git describe --tags)
+
+before_install:
+    - docker build -t srlobo/challenge:$VERSION
+    - docker run -d "bundle exec rspec specs/"
+    - docker image ls
+
 jobs:
  include:
   - stage: test
-    script: rspec specs/
-  - stage: build
-    script: docker build .
+    script: docker run --rm -it srlobo/challenge:$VERSION rspec specs/
+  - stage: upload
+    script: docker push srlobo/challenge:$VERSION
