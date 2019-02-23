@@ -1,9 +1,21 @@
 language: ruby
-rvm:
- - 2.5
+services:
+    - docker
+
+env:
+    - VERSION=$(git describe --tags)
+
+before_install:
+    - echo "Construyendo version $VERSION"
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker build -t srlobo/challenge:$VERSION .
+    - docker image ls
+
 jobs:
  include:
   - stage: test
-    script: rspec specs/
-  - stage: build
-    script: docker build .
+    install: true
+    script: docker run --rm -it srlobo/challenge:$VERSION rspec specs/
+  - stage: upload
+    install: true
+    script: docker push srlobo/challenge:$VERSION
