@@ -15,8 +15,9 @@ class App < Base
 
 # Return json of a random dog of a specific breed
 #
-# get "/random_breed" do
-#  if params.has_key?('breed')
-#  end
-# end
+ get "/random_breed" do
+  if params.has_key?('breed')
+	  json :message => HTTParty.get('https://dog.ceo/api/breed/hound/images/random')
+  end
+ end
 end
