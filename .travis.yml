@@ -8,7 +8,6 @@ env:
 before_install:
     - echo "Construyendo version $VERSION"
     - docker build -t srlobo/challenge:$VERSION .
-    - docker run -d "bundle exec rspec specs/"
     - docker image ls
 
 jobs:
